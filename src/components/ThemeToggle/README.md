@@ -12,7 +12,8 @@
 
 - `themeContext.tsx`
 - `ThemeToggle.tsx`
-- `ThemeToggle.scss`
+- `Button.tsx`
+- `Button.scss`
 - `Moon.svg`
 - `Sun.svg`
 
@@ -56,10 +57,6 @@ function Component() {
   return <div>Current theme: {theme}</div>;
 }
 ```
-
-## CSS Variables
-
-Ensure your app has SCSS variables defined. You can find them in `_variables.scss` file
 
 ## Props
 

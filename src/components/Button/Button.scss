@@ -1,0 +1,145 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out,
+  color 0.2s ease-in-out,
+  opacity 0.2s ease-in-out,
+  transform 0.1s ease-in-out;
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+
+  &--loading {
+    cursor: wait;
+
+    .btn__spinner {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+        animation: spin 1s linear infinite;
+        stroke: currentColor;
+      }
+
+      circle {
+        opacity: 0.25;
+      }
+
+      circle {
+        opacity: 0.75;
+        stroke-dasharray: 60;
+        stroke-dashoffset: 45;
+      }
+    }
+  }
+
+  &--default {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+  }
+
+  &--destructive {
+    background-color: var(--destructive);
+    color: var(--destructive-foreground);
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: 1px solid var(--input);
+    color: var(--foreground);
+
+    &:hover:not(:disabled) {
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+  }
+
+  &--link {
+    background-color: transparent;
+    color: var(--foreground);
+
+    &:hover:not(:disabled) {
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+    }
+  }
+
+  &--default-size {
+    height: 2.25rem;
+    padding: 0 1rem;
+  }
+
+  &--sm {
+    height: 2rem;
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  &--lg {
+    height: 2.5rem;
+    padding: 0 2rem;
+  }
+
+  &--icon {
+    height: 2.25rem;
+    width: 2.25rem;
+    padding: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

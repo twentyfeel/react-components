@@ -1,8 +1,8 @@
 import React from "react";
-import "./ThemeToggle.scss";
 import { useTheme } from "./context/themeContext.tsx";
 import MoonIcon from "../../assets/icons/ThemeToggle/Moon.svg?react";
 import SunIcon from "../../assets/icons/ThemeToggle/Sun.svg?react";
+import { Button } from "../Button/Button.tsx";
 
 type ThemeToggleProps = {
   className?: string;
@@ -16,14 +16,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = "" }) => {
   };
 
   return (
-    // TODO: replace with button component when one is created
-    <button
+    <Button
+      size="icon"
       onClick={toggleTheme}
-      className={`theme-toggle ${className}`}
+      className={`${className}`}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
     >
       {theme === "light" ? <MoonIcon /> : <SunIcon />}
-    </button>
+    </Button>
   );
 };
 
