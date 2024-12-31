@@ -1,0 +1,15 @@
+.app {
+  padding: 20px;
+
+  h1 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+}
+
+.theme-toggle {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}

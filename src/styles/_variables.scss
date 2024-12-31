@@ -1,0 +1,109 @@
+@use "sass:map";
+
+$light-theme: (
+  // Base
+  "background": hsl(0, 0%, 100%),
+  "foreground": hsl(235, 12%, 4%),
+  // Card
+  "card": hsl(0, 0%, 100%),
+  "card-foreground": hsl(235, 12%, 4%),
+  // Popover
+  "popover": hsl(0, 0%, 100%),
+  "popover-foreground": hsl(235, 12%, 4%),
+  // Primary
+  "primary": hsl(235, 7%, 12%),
+  "primary-foreground": hsl(0, 0%, 99%),
+  // Secondary
+  "secondary": hsl(235, 5%, 96%),
+  "secondary-foreground": hsl(235, 7%, 12%),
+  // Muted
+  "muted": hsl(235, 5%, 96%),
+  "muted-foreground": hsl(235, 4%, 45%),
+  // Accent
+  "accent": hsl(235, 5%, 96%),
+  "accent-foreground": hsl(235, 7%, 12%),
+  // Destructive
+  "destructive": hsl(358, 75%, 52%),
+  "destructive-foreground": hsl(0, 0%, 99%),
+  // Borders & Input
+  "border": hsl(235, 6%, 90%),
+  "input": hsl(235, 6%, 90%),
+  "ring": hsl(235, 5%, 65%),
+  // Charts
+  "chart-1": hsl(15, 78%, 62%),
+  "chart-2": hsl(175, 60%, 40%),
+  "chart-3": hsl(200, 38%, 25%),
+  "chart-4": hsl(45, 76%, 67%),
+  "chart-5": hsl(30, 88%, 68%),
+  // Sidebar
+  "sidebar-background": hsl(0, 0%, 99%),
+  "sidebar-foreground": hsl(235, 5%, 26%),
+  "sidebar-primary": hsl(235, 7%, 12%),
+  "sidebar-primary-foreground": hsl(0, 0%, 99%),
+  "sidebar-accent": hsl(235, 5%, 96%),
+  "sidebar-accent-foreground": hsl(235, 7%, 12%),
+  "sidebar-border": hsl(222, 13%, 91%),
+  "sidebar-ring": hsl(235, 5%, 65%),
+  // Other
+  "radius": 0.5rem
+);
+
+$dark-theme: (
+  // Base
+  "background": hsl(235, 12%, 4%),
+  "foreground": hsl(0, 0%, 99%),
+  // Card
+  "card": hsl(235, 12%, 4%),
+  "card-foreground": hsl(0, 0%, 99%),
+  // Popover
+  "popover": hsl(235, 12%, 4%),
+  "popover-foreground": hsl(0, 0%, 99%),
+  // Primary
+  "primary": hsl(0, 0%, 99%),
+  "primary-foreground": hsl(235, 7%, 12%),
+  // Secondary
+  "secondary": hsl(235, 4%, 16%),
+  "secondary-foreground": hsl(0, 0%, 99%),
+  // Muted
+  "muted": hsl(235, 4%, 16%),
+  "muted-foreground": hsl(235, 5%, 65%),
+  // Accent
+  "accent": hsl(235, 4%, 16%),
+  "accent-foreground": hsl(0, 0%, 99%),
+  // Destructive
+  "destructive": hsl(358, 65%, 32%),
+  "destructive-foreground": hsl(0, 86%, 98%),
+  // Borders & Input
+  "border": hsl(235, 4%, 16%),
+  "input": hsl(235, 4%, 16%),
+  "ring": hsl(235, 5%, 84%),
+  // Charts
+  "chart-1": hsl(222, 72%, 52%),
+  "chart-2": hsl(162, 62%, 46%),
+  "chart-3": hsl(32, 82%, 56%),
+  "chart-4": hsl(282, 67%, 62%),
+  "chart-5": hsl(342, 77%, 56%),
+  // Sidebar
+  "sidebar-background": hsl(235, 7%, 12%),
+  "sidebar-foreground": hsl(235, 5%, 96%),
+  "sidebar-primary": hsl(225, 77%, 50%),
+  "sidebar-primary-foreground": hsl(0, 0%, 100%),
+  "sidebar-accent": hsl(235, 4%, 16%),
+  "sidebar-accent-foreground": hsl(235, 5%, 96%),
+  "sidebar-border": hsl(235, 4%, 16%),
+  "sidebar-ring": hsl(235, 5%, 84%),
+  // Other
+  "radius": 0.5rem
+);
+
+:root {
+  @each $name, $value in $light-theme {
+    --#{$name}: #{$value};
+  }
+}
+
+.dark {
+  @each $name, $value in $dark-theme {
+    --#{$name}: #{$value};
+  }
+}

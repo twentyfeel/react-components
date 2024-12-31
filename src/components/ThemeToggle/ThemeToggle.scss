@@ -1,0 +1,28 @@
+.theme-toggle {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  transition: all 0.2s ease-in-out;
+  border: none;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: rotate(12deg);
+  }
+}
