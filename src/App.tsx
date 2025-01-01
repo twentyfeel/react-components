@@ -1,13 +1,19 @@
 import "./App.scss";
-import ThemeToggle from "./components/ThemeToggle/ThemeToggle.tsx";
 import Typography from "./examples/Typography";
+import Navbar from "./components/Navigation/Navbar/Navbar.tsx";
 
 function App() {
   return (
     <div className="app">
-      <h1>React Components</h1>
-      {/* TODO: here will come navigation when we create one*/}
-      <ThemeToggle className="theme-toggle" />
+      {/*<Navbar colors={{ backgroundColor: "nav-bg-test" }} />*/}
+      <Navbar
+        menuItems={[
+          { label: "Home", href: "/" },
+          { label: "Test", href: "/test" },
+        ]}
+        showSearch={true}
+        onSearch={query => console.log(query)}
+      />
 
       {/* Create router for examples */}
       <Typography />

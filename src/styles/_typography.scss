@@ -135,7 +135,8 @@ caption {
 sub, sup {
   font-size: 75%;
   line-height: 0;
-  position: relative;
+  // NOTE: problems with navigation
+  //position: relative;
   vertical-align: baseline;
 }
 
@@ -203,16 +204,8 @@ h6 {
 }
 
 a {
-  color: var(--primary);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 0.1em;
-  transition: all 0.2s ease-in-out;
-}
-
-a:hover {
-  color: var(--primary-foreground);
-  background-color: var(--primary);
+  all: unset;
+  cursor: pointer;
 }
 
 dl {

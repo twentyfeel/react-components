@@ -1,8 +1,12 @@
 .app {
-  padding: 20px;
+  padding-inline: 20px;
 
   h1 {
     color: var(--primary);
     margin-bottom: 1rem;
   }
+}
+
+.nav-bg-test {
+  background: #000;
 }
