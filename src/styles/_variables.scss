@@ -45,6 +45,7 @@ $light-theme: (
   "sidebar-border": hsl(222, 13%, 91%),
   "sidebar-ring": hsl(235, 5%, 65%),
   // Other
+  "nav-bg": rgba(255, 255, 255, 0.8),
   "radius": 0.5rem
 );
 
@@ -93,6 +94,7 @@ $dark-theme: (
   "sidebar-border": hsl(235, 4%, 16%),
   "sidebar-ring": hsl(235, 5%, 84%),
   // Other
+  "nav-bg": rgba(0, 0, 0, 0.8),
   "radius": 0.5rem
 );
 
