@@ -17,12 +17,16 @@
   - ~~Code block~~
   - ~~Blockquote~~
 
-- Icons
-  - System icons
-  - Social icons
-  - Custom icons
-  - Icon sizes
-  - Colored icons
+- ~~Icons~~
+  - We should not include icons in our library. We can create Icon
+    Sprites [svgsprites](https://svgsprit.es/) that would be best approach,
+    but we don't need that! For seek of simplicity we have already so many icon library's that we
+    don't need one more, instead just use one of those.
+
+  - https://heroicons.com/
+  - https://phosphoricons.com/
+  - https://feathericons.com/
+  - and many more...
 
 ## Form Controls
 
