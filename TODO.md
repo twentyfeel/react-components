@@ -9,13 +9,13 @@
   - Icons: left, right
   - ~~Loading spinner~~
 
-- Typography
-  - Heading (h1-h6)
-  - Paragraph
-  - Text variants
-  - Lists (ordered, unordered)
-  - Code block
-  - Blockquote
+- ~~Typography~~
+  - ~~Heading (h1-h6)~~
+  - ~~Paragraph~~
+  - ~~Text variants~~
+  - ~~Lists (ordered, unordered)~~
+  - ~~Code block~~
+  - ~~Blockquote~~
 
 - Icons
   - System icons

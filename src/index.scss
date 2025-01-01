@@ -1,5 +1,7 @@
 @use "./styles/variables";
+@use "./styles/typography";
 
+// TODO: all of this and html will be moved to reset.scss
 * {
   margin: 0;
   padding: 0;
@@ -7,10 +9,10 @@
 }
 
 html {
-  width: 100%;
-  height: 100%;
   scroll-behavior: smooth;
-  font-family: "Inter", serif;
+  font-family: var(--font-family-sans);
+  word-break: break-word;
+  font-variant-numeric: slashed-zero;
 }
 
 body {

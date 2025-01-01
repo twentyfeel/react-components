@@ -1,0 +1,248 @@
+// TODO: Move this into reset.scss file when one is created
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+:root {
+  --font-size-base: clamp(0.875rem, 0.875rem + 0.25vw, 1.125rem);
+  --font-size-sm: clamp(0.75rem, 0.75rem + 0.25vw, 1rem);
+  --font-size-lg: clamp(1rem, 1rem + 0.25vw, 1.25rem);
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-family-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-family-mono: "Inconsolata", ui-monospace, monospace;
+}
+
+p, li, b, i, strong, a, span, div, label, input, textarea, select, button,
+article, section, nav, footer, header, aside, main,
+address, time, small, em, cite, figcaption, caption {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-normal);
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+dt {
+  font-weight: var(--font-weight-semibold);
+}
+
+dd {
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+}
+
+code, kbd, samp, var {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-medium);
+  background: var(--muted);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius);
+}
+
+mark {
+  background: var(--destructive);
+  color: var(--destructive-foreground);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+blockquote, q {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 2vw, 2rem);
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+cite {
+  font-style: italic;
+  color: var(--muted-foreground);
+}
+
+pre {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  padding: clamp(1rem, 2vw, 2rem);
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  font-weight: var(--font-weight-semibold);
+  background: var(--muted);
+}
+
+caption {
+  margin-bottom: 0.5rem;
+  font-style: italic;
+  color: var(--muted-foreground);
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted var(--border);
+  cursor: help;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  // NOTE: Prob should remove this and give us option to define margins instead of overriding this..
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-family: var(--font-family-sans);
+}
+
+h1 {
+  font-size: clamp(2rem, 2rem + 2vw, 4rem);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 1.75rem + 1.5vw, 3rem);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 1.5rem + 1vw, 2.25rem);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+h4 {
+  font-size: clamp(1.25rem, 1.25rem + 0.75vw, 1.75rem);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+h5 {
+  font-size: clamp(1.125rem, 1.125rem + 0.5vw, 1.5rem);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+h6 {
+  font-size: clamp(1rem, 1rem + 0.25vw, 1.25rem);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.1em;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--primary-foreground);
+  background-color: var(--primary);
+}
+
+dl {
+  margin: 1em 0;
+}
+
+figure {
+  margin: 1.5rem 0;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+details {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+summary {
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+progress, meter {
+  width: 100%;
+  height: 0.5rem;
+  margin: 0.5rem 0;
+}
