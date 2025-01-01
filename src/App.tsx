@@ -7,7 +7,6 @@ function App() {
     <>
       <Navbar
         menuItems={[
-          { label: "Home", href: "/" },
           {
             label: "Products",
             submenu: [
@@ -25,7 +24,6 @@ function App() {
               { label: "Test3", href: "/test3" },
             ],
           },
-          { label: "Pricing", href: "/pricing" },
           {
             label: "Resources",
             submenu: [
@@ -35,6 +33,8 @@ function App() {
               { label: "Test4", href: "/test4" },
             ],
           },
+          { label: "Pricing", href: "/pricing" },
+          { label: "Something", href: "/something" },
         ]}
         showSearch={true}
         onSearch={query => console.log(query)}

@@ -34,7 +34,6 @@
   - Responsive navbar
   - Dropdown menus
   - Search bar
-  - User menu
 
 - Sidebar
   - Collapsible sidebar

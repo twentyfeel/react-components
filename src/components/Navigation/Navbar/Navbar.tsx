@@ -150,7 +150,6 @@ const Navbar: React.FC<NavbarProps> = ({
                               <span className="submenu-icon">
                                 {/*TODO: move to svg file*/}
                                 <svg
-                                  data-testid="geist-icon"
                                   height="16"
                                   strokeLinejoin="round"
                                   viewBox="0 0 16 16"
@@ -273,13 +272,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   >
                     <div className="navbar__command-item-icon">
                       {/*TODO: move to svg*/}
-                      <svg
-                        data-testid="geist-icon"
-                        height="16"
-                        strokeLinejoin="round"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
+                      <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
                         <path
                           fillRule="evenodd"
                           clipRule="evenodd"
