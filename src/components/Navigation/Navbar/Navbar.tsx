@@ -1,6 +1,6 @@
 import { NavbarProps } from "./props/NavbarProps.ts";
 import { useCallback, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import ThemeToggle from "../../ThemeToggle/ThemeToggle.tsx";
 import "./Navbar.scss";
 
@@ -152,6 +152,44 @@ const Navbar: React.FC<NavbarProps> = ({
     activeColor: colors.activeColor || "navbar__active-default",
   };
 
+  const mobileSubmenuVariants = {
+    closed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        height: { duration: 0.3 },
+        opacity: { duration: 0.2 },
+      },
+    },
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        height: { duration: 0.3 },
+        opacity: { duration: 0.3 },
+      },
+    },
+  };
+
+  const mobileSubmenuItemVariants = {
+    closed: (i: number) => ({
+      x: -20,
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        delay: 0.1 - i * 0.05,
+      },
+    }),
+    open: (i: number) => ({
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        delay: 0.1 + i * 0.05,
+      },
+    }),
+  };
+
   return (
     <>
       <header className={`${baseColors.backgroundColor} navbar ${className}`}>
@@ -282,15 +320,30 @@ const Navbar: React.FC<NavbarProps> = ({
                                     </svg>
                                   </span>
                                 </button>
-                                {openSubmenu === index && (
-                                  <ul>
-                                    {item.submenu.map((subitem, subindex) => (
-                                      <li key={subindex}>
-                                        <a href={subitem.href}>{subitem.label}</a>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                )}
+                                <AnimatePresence mode="wait">
+                                  <motion.div
+                                    initial="closed"
+                                    animate={openSubmenu === index ? "open" : "closed"}
+                                    exit="closed"
+                                    variants={mobileSubmenuVariants}
+                                    style={{ overflow: "hidden" }}
+                                  >
+                                    <ul>
+                                      {item.submenu.map((subitem, subindex) => (
+                                        <motion.li
+                                          key={subindex}
+                                          custom={subindex}
+                                          variants={mobileSubmenuItemVariants}
+                                          initial="closed"
+                                          animate={openSubmenu === index ? "open" : "closed"}
+                                          exit="closed"
+                                        >
+                                          <a href={subitem.href}>{subitem.label}</a>
+                                        </motion.li>
+                                      ))}
+                                    </ul>
+                                  </motion.div>
+                                </AnimatePresence>
                               </div>
                             ) : (
                               <a href={item.href}>{item.label}</a>
