@@ -30,10 +30,11 @@
 
 ## Navigation
 
-- Navbar
-  - Responsive navbar
-  - Dropdown menus
-  - Search bar
+- ~~Navbar~~
+  - ~~Responsive navbar~~
+  - ~~Dropdown menus~~
+  - ~~Theme toggle~~
+  - ~~Search bar~~
 
 - Sidebar
   - Collapsible sidebar
