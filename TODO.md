@@ -28,6 +28,38 @@
   - https://feathericons.com/
   - and many more...
 
+## Navigation
+
+- Navbar
+  - Responsive navbar
+  - Dropdown menus
+  - Search bar
+
+- Sidebar
+  - Collapsible sidebar
+  - Nested menu
+  - Mini variant
+  - Custom scrollbar
+
+- Tabs
+  - Basic tabs
+  - Icon tabs
+  - Vertical tabs
+  - Scrollable tabs
+  - Custom tab panels
+
+- Breadcrumbs
+  - Basic breadcrumbs
+  - With icons
+  - Custom separator
+  - Responsive
+
+- Pagination
+  - Number pagination
+  - Previous/Next
+  - Items per page
+  - Jump to page
+
 ## Form Controls
 
 - Input
@@ -73,39 +105,6 @@
   - Form submission
   - Field arrays
   - Error handling
-
-## Navigation
-
-- Navbar
-  - Responsive navbar
-  - Dropdown menus
-  - Search bar
-  - User menu
-
-- Sidebar
-  - Collapsible sidebar
-  - Nested menu
-  - Mini variant
-  - Custom scrollbar
-
-- Tabs
-  - Basic tabs
-  - Icon tabs
-  - Vertical tabs
-  - Scrollable tabs
-  - Custom tab panels
-
-- Breadcrumbs
-  - Basic breadcrumbs
-  - With icons
-  - Custom separator
-  - Responsive
-
-- Pagination
-  - Number pagination
-  - Previous/Next
-  - Items per page
-  - Jump to page
 
 ## Feedback
 

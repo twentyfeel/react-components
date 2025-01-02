@@ -1,17 +1,63 @@
 import "./App.scss";
-import ThemeToggle from "./components/ThemeToggle/ThemeToggle.tsx";
 import Typography from "./examples/Typography";
+import Navbar from "./components/Navigation/Navbar/Navbar.tsx";
 
 function App() {
   return (
-    <div className="app">
-      <h1>React Components</h1>
-      {/* TODO: here will come navigation when we create one*/}
-      <ThemeToggle className="theme-toggle" />
+    <>
+      <Navbar
+        menuItems={[
+          {
+            label: "Products",
+            submenu: [
+              { label: "Test1", href: "/test1" },
+              { label: "Test2", href: "/test2" },
+              { label: "Test3", href: "/test3" },
+              { label: "Test4", href: "/test4" },
+            ],
+          },
+          {
+            label: "Solutions",
+            submenu: [
+              { label: "Test1", href: "/test1" },
+              { label: "Test2", href: "/test2" },
+              { label: "Test3", href: "/test3" },
+            ],
+          },
+          {
+            label: "Resources",
+            submenu: [
+              { label: "Test1", href: "/test1" },
+              { label: "Test2", href: "/test2" },
+              { label: "Test3", href: "/test3" },
+              { label: "Test4", href: "/test4" },
+            ],
+          },
+          { label: "Pricing", href: "/pricing" },
+          { label: "Something", href: "/something" },
+        ]}
+        commandItems={[
+          {
+            id: "introduction",
+            label: "Introduction",
+            onSelect: () => console.log("Introduction"),
+          },
+          {
+            id: "getting-started",
+            label: "Getting Started",
+            onSelect: (id, label) => console.log(id, label),
+          },
+        ]}
+        showSearch
+        showThemeToggle
+        onSearch={query => console.log("From search: " + query)}
+      />
 
-      {/* Create router for examples */}
-      <Typography />
-    </div>
+      <div className="app">
+        {/* Create router for examples */}
+        <Typography />
+      </div>
+    </>
   );
 }
 

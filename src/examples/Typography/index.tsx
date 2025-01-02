@@ -151,14 +151,6 @@ const Typography = () => {
           <summary>Click to expand details</summary>
           <p>This is the expanded content that appears when you click the summary.</p>
         </details>
-
-        <div className="typography-test__interactive">
-          <label>Progress:</label>
-          <progress value="70" max="100"></progress>
-
-          <label>Meter:</label>
-          <meter value="0.6" min="0" max="1"></meter>
-        </div>
       </section>
 
       <footer className="typography-test__footer">
