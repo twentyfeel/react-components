@@ -9,10 +9,4 @@ export type NavbarProps = {
   searchPlaceholder?: string;
   logoComponent?: React.ReactNode;
   className?: string;
-  colors?: {
-    backgroundColor?: string;
-    textColor?: string;
-    hoverColor?: string;
-    activeColor?: string;
-  };
 };

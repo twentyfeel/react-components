@@ -13,7 +13,6 @@ const Navbar: React.FC<NavbarProps> = ({
   searchPlaceholder = "Search...",
   logoComponent,
   className = "",
-  colors = {},
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
@@ -145,13 +144,6 @@ const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isCommandOpen, selectedIndex, commandItems]);
 
-  const baseColors = {
-    backgroundColor: colors.backgroundColor || "navbar__bg-default",
-    textColor: colors.textColor || "navbar__text-default",
-    hoverColor: colors.hoverColor || "navbar__hover-default",
-    activeColor: colors.activeColor || "navbar__active-default",
-  };
-
   const mobileSubmenuVariants = {
     closed: {
       height: 0,
@@ -192,7 +184,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <header className={`${baseColors.backgroundColor} navbar ${className}`}>
+      <header className={`navbar ${className}`}>
         <div className="navbar__wrapper">
           <div className="navbar__logo-wrapper">
             {logoComponent || (

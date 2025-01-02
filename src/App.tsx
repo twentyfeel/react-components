@@ -36,7 +36,7 @@ function App() {
           { label: "Pricing", href: "/pricing" },
           { label: "Something", href: "/something" },
         ]}
-        showSearch={true}
+        showSearch
         onSearch={query => console.log(query)}
       />
 
