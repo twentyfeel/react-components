@@ -174,7 +174,7 @@
         color: var(--foreground);
         cursor: pointer;
         border-radius: 6px;
-        transition: background 0.2s ease;
+        //transition: background 0.2s ease;
 
         &:hover {
           background: var(--secondary);
@@ -259,7 +259,7 @@
     color: var(--foreground);
     cursor: pointer;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    //transition: all 0.2s ease;
     text-decoration: none;
 
     &:hover, &.is-selected {
@@ -330,7 +330,7 @@
         color: var(--foreground);
         text-decoration: none;
         border-radius: 6px;
-        transition: background 0.2s ease;
+        //transition: background 0.2s ease;
         font-size: 14px;
 
         &:hover {
@@ -438,6 +438,7 @@
     font-size: 14px;
     color: var(--muted-foreground);
     width: 237px;
+    transition: color 0.2s ease;
 
     &:hover {
       color: var(--foreground);
@@ -476,7 +477,6 @@
     position: fixed;
     inset: 0;
     background: var(--background);
-    animation: overlay-fade-in 0.15s ease;
     opacity: 0.8;
     z-index: 100;
   }
@@ -492,7 +492,6 @@
     box-shadow: 0 0 0 1px var(--border);
     overflow: hidden;
     transform-origin: center;
-    animation: dialog-scale-in 0.15s ease;
     outline: none;
     z-index: 100;
 
@@ -630,7 +629,6 @@
     box-shadow: 0 0 0 1px var(--border);
     border: none;
     margin-left: 16px;
-    animation: fade-in 0.1s ease;
   }
 
   &__bg-default {

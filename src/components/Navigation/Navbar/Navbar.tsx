@@ -356,59 +356,74 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
       </header>
 
-      {isCommandOpen && (
-        <>
-          <div className="navbar__command-overlay" onClick={handleCloseCommand} />
-          <div className="navbar__command-dialog" role="dialog" aria-modal="true">
-            <div className="navbar__command-top">
-              <div className="navbar__command-input-wrapper">
-                <input
-                  className="navbar__command-input"
-                  placeholder={searchPlaceholder}
-                  value={searchQuery}
-                  onChange={e => handleSearchQuery(e.target.value)}
-                  autoFocus
-                />
-                <button className="navbar__command-esc" onClick={handleCloseCommand}>
-                  Esc
-                </button>
+      <AnimatePresence>
+        {isCommandOpen && (
+          <>
+            <motion.div
+              className="navbar__command-overlay"
+              onClick={handleCloseCommand}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.8 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+            />
+            <motion.div
+              className="navbar__command-dialog"
+              role="dialog"
+              aria-modal="true"
+              initial={{ opacity: 0, transform: "translateX(-50%) scale(0.95)" }}
+              animate={{ opacity: 1, transform: "translateX(-50%) scale(1)" }}
+              exit={{ opacity: 0, transform: "translateX(-50%) scale(0.95)" }}
+              transition={{ duration: 0.15 }}
+            >
+              <div className="navbar__command-top">
+                <div className="navbar__command-input-wrapper">
+                  <input
+                    className="navbar__command-input"
+                    placeholder={searchPlaceholder}
+                    value={searchQuery}
+                    onChange={e => handleSearchQuery(e.target.value)}
+                    autoFocus
+                  />
+                  <button className="navbar__command-esc" onClick={handleCloseCommand}>
+                    Esc
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="navbar__command-content">
-              <div className="navbar__command-list">
+              <div className="navbar__command-content">
                 {/*TODO: Disable scroll when search is active*/}
-                {commandItems.map((item, index) => (
-                  <div
-                    key={item.id}
-                    className={`navbar__command-item ${
-                      selectedIndex === index ? "is-selected" : ""
-                    }`}
-                    onMouseEnter={() => setSelectedIndex(index)}
-                    onClick={() => {
-                      item.onSelect?.();
-                      onSearch?.(item.label);
-                      handleCloseCommand();
-                    }}
-                  >
-                    <div className="navbar__command-item-icon">
-                      {/*TODO: move to svg*/}
-                      <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M14.5 13.5V6.5V5.41421C14.5 5.149 14.3946 4.89464 14.2071 4.70711L9.79289 0.292893C9.60536 0.105357 9.351 0 9.08579 0H8H3H1.5V1.5V13.5C1.5 14.8807 2.61929 16 4 16H12C13.3807 16 14.5 14.8807 14.5 13.5ZM13 13.5V6.5H9.5H8V5V1.5H3V13.5C3 14.0523 3.44772 14.5 4 14.5H12C12.5523 14.5 13 14.0523 13 13.5ZM9.5 5V2.12132L12.3787 5H9.5Z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                <div className="navbar__command-list">
+                  {commandItems.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`navbar__command-item ${selectedIndex === index ? "is-selected" : ""}`}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      onClick={() => {
+                        item.onSelect?.();
+                        onSearch?.(item.label);
+                        handleCloseCommand();
+                      }}
+                    >
+                      <div className="navbar__command-item-icon">
+                        {/*TODO: move to svg*/}
+                        <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M14.5 13.5V6.5V5.41421C14.5 5.149 14.3946 4.89464 14.2071 4.70711L9.79289 0.292893C9.60536 0.105357 9.351 0 9.08579 0H8H3H1.5V1.5V13.5C1.5 14.8807 2.61929 16 4 16H12C13.3807 16 14.5 14.8807 14.5 13.5ZM13 13.5V6.5H9.5H8V5V1.5H3V13.5C3 14.0523 3.44772 14.5 4 14.5H12C12.5523 14.5 13 14.0523 13 13.5ZM9.5 5V2.12132L12.3787 5H9.5Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </div>
+                      <span>{item.label}</span>
                     </div>
-                    <span>{item.label}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </div>
-        </>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };
