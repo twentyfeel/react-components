@@ -1,5 +1,6 @@
 import { NavbarProps } from "./props/NavbarProps.ts";
 import { useCallback, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "../../ThemeToggle/ThemeToggle.tsx";
 import "./Navbar.scss";
 
@@ -20,6 +21,9 @@ const Navbar: React.FC<NavbarProps> = ({
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedDropdown, setSelectedDropdown] = useState<number | null>(null);
+  const [dropdownDir, setDropdownDir] = useState<null | "l" | "r">(null);
+  const [dropdownPosition, setDropdownPosition] = useState(0);
 
   // TODO: move to prop
   const commandItems = [
@@ -34,6 +38,33 @@ const Navbar: React.FC<NavbarProps> = ({
       onSelect: () => console.log("Getting Started"),
     },
   ];
+
+  const handleDropdownSelect = (index: number | null) => {
+    if (index !== null && !menuItems[index]?.submenu) {
+      return;
+    }
+
+    if (typeof selectedDropdown === "number" && typeof index === "number") {
+      setDropdownDir(selectedDropdown > index ? "r" : "l");
+    } else if (index === null) {
+      setDropdownDir(null);
+    }
+    setSelectedDropdown(index);
+  };
+
+  useEffect(() => {
+    if (selectedDropdown !== null) {
+      const tab = document.getElementById(`navbar-tab-${selectedDropdown}`);
+      const content = document.getElementById("dropdown-content");
+
+      if (tab && content) {
+        const tabRect = tab.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+        const tabCenter = tabRect.left + tabRect.width / 2;
+        setDropdownPosition(tabCenter - contentRect.left);
+      }
+    }
+  }, [selectedDropdown]);
 
   const handleMenuToggle = useCallback(() => {
     if (!isOpen) {
@@ -136,50 +167,139 @@ const Navbar: React.FC<NavbarProps> = ({
             <div className={`navbar__menu-container ${isOpen ? "is-open" : ""}`}>
               <nav className="navbar__menu-nav">
                 {menuItems.length > 0 && (
-                  <ul className="navbar__menu-content">
-                    {menuItems.map((item, index) => (
-                      <li key={index} className="navbar__menu-item">
-                        {item.submenu ? (
-                          <div>
+                  <>
+                    {/*DESKTOP PART*/}
+                    <div className="navbar__menu-desktop">
+                      <div
+                        className="navbar__menu-items"
+                        onMouseLeave={() => handleDropdownSelect(null)}
+                      >
+                        {menuItems.map((item, index) =>
+                          item.submenu ? (
                             <button
-                              onClick={() => toggleSubmenu(index)}
-                              aria-expanded={openSubmenu === index}
-                              className="submenu-button"
+                              key={index}
+                              id={`navbar-tab-${index}`}
+                              className={`navbar__menu-button ${selectedDropdown === index ? "is-selected" : ""}`}
+                              onMouseEnter={() => handleDropdownSelect(index)}
+                              onClick={() => handleDropdownSelect(index)}
                             >
-                              {item.label}
-                              <span className="submenu-icon">
-                                {/*TODO: move to svg file*/}
-                                <svg
-                                  height="16"
-                                  strokeLinejoin="round"
-                                  viewBox="0 0 16 16"
-                                  width="16"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M14.0607 5.49999L13.5303 6.03032L8.7071 10.8535C8.31658 11.2441 7.68341 11.2441 7.29289 10.8535L2.46966 6.03032L1.93933 5.49999L2.99999 4.43933L3.53032 4.96966L7.99999 9.43933L12.4697 4.96966L13 4.43933L14.0607 5.49999Z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
-                              </span>
+                              <span>{item.label}</span>
+                              <svg
+                                className={`navbar__chevron ${selectedDropdown === index ? "is-rotated" : ""}`}
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M2.46967 5.46967L3 4.93934L8 9.93934L13 4.93934L13.5303 5.46967L8.53033 10.4697C8.23744 10.7626 7.76256 10.7626 7.46967 10.4697L2.46967 5.46967Z"
+                                  fill="currentColor"
+                                />
+                              </svg>
                             </button>
-                            {openSubmenu === index && (
-                              <ul>
-                                {item.submenu.map((subitem, subindex) => (
-                                  <li key={subindex}>
-                                    <a href={subitem.href}>{subitem.label}</a>
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-                          </div>
-                        ) : (
-                          <a href={item.href}>{item.label}</a>
+                          ) : (
+                            <a key={index} href={item.href} className="navbar__menu-link">
+                              {item.label}
+                            </a>
+                          ),
                         )}
-                      </li>
-                    ))}
-                  </ul>
+
+                        <AnimatePresence>
+                          {selectedDropdown !== null && (
+                            <motion.div
+                              id="dropdown-content"
+                              className="navbar__dropdown"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 8 }}
+                            >
+                              <div className="navbar__dropdown-bridge" />
+                              <motion.span
+                                className="navbar__dropdown-nub"
+                                animate={{ left: dropdownPosition }}
+                                transition={{ duration: 0.25, ease: "easeInOut" }}
+                              />
+
+                              {menuItems.map((item, idx) => (
+                                <div key={idx} className="navbar__dropdown-content">
+                                  {selectedDropdown === idx && item.submenu && (
+                                    <motion.ul
+                                      className="navbar__submenu"
+                                      initial={{
+                                        opacity: 0,
+                                        x:
+                                          dropdownDir === "l"
+                                            ? 100
+                                            : dropdownDir === "r"
+                                              ? -100
+                                              : 0,
+                                      }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                                    >
+                                      {item.submenu.map((subitem, subindex) => (
+                                        <li key={subindex}>
+                                          <a href={subitem.href}>{subitem.label}</a>
+                                        </li>
+                                      ))}
+                                    </motion.ul>
+                                  )}
+                                </div>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+
+                    {/*MOBILE PART*/}
+                    <div className="navbar__menu-mobile">
+                      <ul className="navbar__menu-content">
+                        {menuItems.map((item, index) => (
+                          <li key={index} className="navbar__menu-item">
+                            {item.submenu ? (
+                              <div>
+                                <button
+                                  onClick={() => toggleSubmenu(index)}
+                                  aria-expanded={openSubmenu === index}
+                                  className="submenu-button"
+                                >
+                                  {item.label}
+                                  <span className="submenu-icon">
+                                    <svg
+                                      height="16"
+                                      strokeLinejoin="round"
+                                      viewBox="0 0 16 16"
+                                      width="16"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d="M14.0607 5.49999L13.5303 6.03032L8.7071 10.8535C8.31658 11.2441 7.68341 11.2441 7.29289 10.8535L2.46966 6.03032L1.93933 5.49999L2.99999 4.43933L3.53032 4.96966L7.99999 9.43933L12.4697 4.96966L13 4.43933L14.0607 5.49999Z"
+                                        fill="currentColor"
+                                      />
+                                    </svg>
+                                  </span>
+                                </button>
+                                {openSubmenu === index && (
+                                  <ul>
+                                    {item.submenu.map((subitem, subindex) => (
+                                      <li key={subindex}>
+                                        <a href={subitem.href}>{subitem.label}</a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
+                            ) : (
+                              <a href={item.href}>{item.label}</a>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
                 )}
               </nav>
               {showThemeToggle && (
