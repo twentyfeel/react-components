@@ -17,6 +17,8 @@ Copy these files to your project:
 - `SubMenuItemProps.ts`
 - `CommandItemProps.ts`
 - `Navbar.scss`
+- `File.svg`
+- `Search.svg`
 
 ### NOTE: If ThemeToggle is enabled, also copy this files:
 
