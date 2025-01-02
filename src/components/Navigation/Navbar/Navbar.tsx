@@ -2,12 +2,15 @@ import { NavbarProps } from "./props/NavbarProps.ts";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ThemeToggle from "../../ThemeToggle/ThemeToggle.tsx";
+import File from "../../../assets/icons/Navbar/File.svg?react";
+import Search from "../../../assets/icons/Navbar/Search.svg?react";
 import "./Navbar.scss";
 
 const Navbar: React.FC<NavbarProps> = ({
   logo = "Twentyfeel",
   menuItems = [],
-  showThemeToggle = true,
+  commandItems = [],
+  showThemeToggle = false,
   showSearch = false,
   onSearch,
   searchPlaceholder = "Search...",
@@ -23,20 +26,6 @@ const Navbar: React.FC<NavbarProps> = ({
   const [selectedDropdown, setSelectedDropdown] = useState<number | null>(null);
   const [dropdownDir, setDropdownDir] = useState<null | "l" | "r">(null);
   const [dropdownPosition, setDropdownPosition] = useState(0);
-
-  // TODO: move to prop
-  const commandItems = [
-    {
-      id: "introduction",
-      label: "Introduction",
-      onSelect: () => console.log("Introduction"),
-    },
-    {
-      id: "getting-started",
-      label: "Getting Started",
-      onSelect: () => console.log("Getting Started"),
-    },
-  ];
 
   const handleDropdownSelect = (index: number | null) => {
     if (index !== null && !menuItems[index]?.submenu) {
@@ -135,13 +124,35 @@ const Navbar: React.FC<NavbarProps> = ({
       }
 
       if (e.key === "Enter" && commandItems[selectedIndex]) {
-        commandItems[selectedIndex].onSelect?.();
+        commandItems[selectedIndex].onSelect?.(
+          commandItems[selectedIndex].id,
+          commandItems[selectedIndex].label,
+        );
         handleCloseCommand();
       }
     };
 
+    const disableScroll = (e: Event) => {
+      e.preventDefault();
+    };
+
+    if (isCommandOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("wheel", disableScroll, { passive: false });
+      window.addEventListener("touchmove", disableScroll, { passive: false });
+    } else {
+      document.body.style.overflow = "";
+      window.removeEventListener("wheel", disableScroll);
+      window.removeEventListener("touchmove", disableScroll);
+    }
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+      window.removeEventListener("wheel", disableScroll);
+      window.removeEventListener("touchmove", disableScroll);
+    };
   }, [isCommandOpen, selectedIndex, commandItems]);
 
   const mobileSubmenuVariants = {
@@ -374,15 +385,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     aria-label="Search"
                     onClick={handleSearch}
                   >
-                    {/*TODO: move to svg*/}
-                    <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M1.5 6.5C1.5 3.73858 3.73858 1.5 6.5 1.5C9.26142 1.5 11.5 3.73858 11.5 6.5C11.5 9.26142 9.26142 11.5 6.5 11.5C3.73858 11.5 1.5 9.26142 1.5 6.5ZM6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C8.02469 13 9.42677 12.475 10.5353 11.596L13.9697 15.0303L14.5 15.5607L15.5607 14.5L15.0303 13.9697L11.596 10.5353C12.475 9.42677 13 8.02469 13 6.5C13 2.91015 10.0899 0 6.5 0Z"
-                        fill="currentColor"
-                      />
-                    </svg>
+                    <Search />
                   </button>
                 </>
               )}
@@ -436,7 +439,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 </div>
               </div>
               <div className="navbar__command-content">
-                {/*TODO: Disable scroll when search is active*/}
                 <div className="navbar__command-list">
                   {commandItems.map((item, index) => (
                     <div
@@ -444,21 +446,13 @@ const Navbar: React.FC<NavbarProps> = ({
                       className={`navbar__command-item ${selectedIndex === index ? "is-selected" : ""}`}
                       onMouseEnter={() => setSelectedIndex(index)}
                       onClick={() => {
-                        item.onSelect?.();
+                        item.onSelect?.(item.id, item.label);
                         onSearch?.(item.label);
                         handleCloseCommand();
                       }}
                     >
                       <div className="navbar__command-item-icon">
-                        {/*TODO: move to svg*/}
-                        <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M14.5 13.5V6.5V5.41421C14.5 5.149 14.3946 4.89464 14.2071 4.70711L9.79289 0.292893C9.60536 0.105357 9.351 0 9.08579 0H8H3H1.5V1.5V13.5C1.5 14.8807 2.61929 16 4 16H12C13.3807 16 14.5 14.8807 14.5 13.5ZM13 13.5V6.5H9.5H8V5V1.5H3V13.5C3 14.0523 3.44772 14.5 4 14.5H12C12.5523 14.5 13 14.0523 13 13.5ZM9.5 5V2.12132L12.3787 5H9.5Z"
-                            fill="currentColor"
-                          />
-                        </svg>
+                        <File />
                       </div>
                       <span>{item.label}</span>
                     </div>

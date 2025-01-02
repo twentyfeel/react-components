@@ -15,7 +15,12 @@ Copy these files to your project:
 - `NavbarProps.ts`
 - `MenuItemProps.ts`
 - `SubMenuItemProps.ts`
+- `CommandItemProps.ts`
 - `Navbar.scss`
+
+### NOTE: If ThemeToggle is enabled, also copy this files:
+
+- [ThemeToggle](../../ThemeToggle/README.md)
 
 ## Usage
 
@@ -39,8 +44,20 @@ function Header() {
     <Navbar
       logo="Programiraj"
       menuItems={menuItems}
+      commandItems={[
+        {
+          id: "introduction",
+          label: "Introduction",
+          onSelect: () => console.log("Introduction"),
+        },
+        {
+          id: "getting-started",
+          label: "Getting Started",
+          onSelect: (id, label) => console.log(id, label),
+        },
+      ]}
       showSearch
-      showThemeToggle={false}
+      showThemeToggle
       onSearch={query => console.log(query)}
     />
   );
@@ -53,7 +70,8 @@ function Header() {
 |-------------------|-------------------------|--------------|------------------------------------|
 | logo              | string                  | "Twentyfeel" | Logo text                          |
 | menuItems         | MenuItemProps[]         | []           | Array of menu items                |
-| showThemeToggle   | boolean                 | true         | Whether to show theme toggle       |
+| commandItems      | CommandItemProps[]      | []           | Array of command items             |
+| showThemeToggle   | boolean                 | false        | Whether to show theme toggle       |
 | showSearch        | boolean                 | false        | Whether to show search input       |
 | onSearch          | (query: string) => void | nothing      | Callback when search query changes |
 | searchPlaceholder | string                  | "Search..."  | Placeholder text for search input  |
@@ -74,6 +92,14 @@ function Header() {
 |-------|--------|----------|------------------------|
 | label | string | Yes      | Menu item label text   |
 | href  | string | Yes      | URL for menu item link |
+
+### CommandItemProps
+
+| Prop     | Type                                                          | Required | Description                    |
+|----------|---------------------------------------------------------------|----------|--------------------------------|
+| id       | string                                                        | Yes      | Command item id (URL)          |
+| label    | string                                                        | Yes      | Command item label text        |
+| onSelect | (id: string \| undefined, label: string \| undefined) => void | No       | Callback when item is selected |
 
 ## CSS Variables
 

@@ -36,8 +36,21 @@ function App() {
           { label: "Pricing", href: "/pricing" },
           { label: "Something", href: "/something" },
         ]}
+        commandItems={[
+          {
+            id: "introduction",
+            label: "Introduction",
+            onSelect: () => console.log("Introduction"),
+          },
+          {
+            id: "getting-started",
+            label: "Getting Started",
+            onSelect: (id, label) => console.log(id, label),
+          },
+        ]}
         showSearch
-        onSearch={query => console.log(query)}
+        showThemeToggle
+        onSearch={query => console.log("From search: " + query)}
       />
 
       <div className="app">
