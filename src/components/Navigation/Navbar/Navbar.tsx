@@ -173,7 +173,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const mobileSubmenuItemVariants = {
     closed: (i: number) => ({
-      x: -20,
+      x: 0,
       opacity: 0,
       transition: {
         duration: 0.2,
